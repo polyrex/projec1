@@ -1,7 +1,7 @@
 ```
 @startuml erd
-!include https://github.com/murataSandbox/metadata-management/raw/refs/heads/main/er/attributes.pu
-!include https://github.com/murataSandbox/metadata-management/raw/refs/heads/main/er/tables.pu
+!include https://github.com/polyrex/projec1/blob/main/attributes.pu
+!include https://github.com/polyrex/projec1/blob/main/tables.pu
 
 companies ||-o{ users
 
