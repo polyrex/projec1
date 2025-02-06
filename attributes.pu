@@ -1,0 +1,6 @@
+@startuml
+
+!define PURCHASE_ORDER_NBR NO00011 [注文ＮＯ．] VARCHAR(11) /'注文ＮＯ(月度＋原価部門ごと連番4桁)'/
+!define CARD_NO NO00013 [カードＮＯ．] VARCHAR(7) /'得意先からの注文および当社・関係会社の部門間取引における、個々の注文に対して付与するオリジナルな番号 【旧名】カードＮＯ．（親）'/
+
+@enduml
