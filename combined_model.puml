@@ -1,0 +1,68 @@
+@startuml tables
+!define PURCHASE_ORDER_NBR NO00011 [注文ＮＯ．] VARCHAR(11) /'注文ＮＯ(月度＋原価部門ごと連番4桁)'/
+!define CARD_NO NO00013 [カードＮＯ．] VARCHAR(7) /'得意先からの注文および当社・関係会社の部門間取引における、個々の注文に対して付与するオリジナルな番号 【旧名】カードＮＯ．（親）'/
+!define Table(name,desc) entity name as "desc" << (T,#FFAAAA) >>
+!define primary_key(x) <b><u>x</u></b>
+!define foreign_key(x) <u>x</u>
+
+skinparam linetype ortho
+
+Table(companies, "companies\n会社") #PaleTurquoise {
+  primary_key(company_id) <<generated>> [COMPANY_ID]
+  --
+  name [会社名]
+  CARD_NO
+  PURCHASE_ORDER_NBR 
+  'created_at [作成日]
+  'updated_at [更新日]
+}
+
+Table(users, "users\nユーザー") #PaleTurquoise {
+  primary_key(user_id) <<generated>> [USER_ID]
+  --
+  foreign_key(company_id) <<FK>> [COMPANY_ID]
+  login_id [ログインID]
+  password [パスワード]
+  'created_at [作成日]
+  'updated_at [更新日]
+}
+
+entity positions as "positions\n役職マスタ" {
+  + id [PK]
+  --
+  company_id
+  name [役職名]
+  created_at [作成日]
+  updated_at [更新日]
+}
+
+entity user_positions as "user_positions\nユーザー役職マスタ関連" {
+  + id [PK]
+  --
+  user_id
+  position_id
+  created_at [作成日]
+  updated_at [更新日]
+}
+
+entity user_profiles as "user_profiles\nユーザー詳細" {
+  + id [PK]
+  --
+  user_id
+  birthday[生年月日]
+  name [ユーザー名]
+  created_at [作成日]
+  updated_at [更新日]
+}
+
+entity user_subordinate_users as "user_subordinate_users\nユーザー部下ユーザー関連" {
+  + id [PK]
+  --
+  user_id
+  subordinate_user_id [部下ユーザーID]
+  password [パスワード]
+  created_at [作成日]
+  updated_at [更新日]
+}
+companies ||-o{ users
+@enduml
